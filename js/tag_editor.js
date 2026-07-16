@@ -108,7 +108,7 @@ export class TagEditor {
       trans.className = "pte-chip-trans";
       if (tok.__trans) trans.textContent = tok.__trans;
       // 訳ボタンは2段目の頭(将来は記号等へ変更予定)
-      const tbtn = this._btn("pte-translate", "訳", "翻訳(日本語)", (e) => {
+      const tbtn = this._btn("pte-translate", "🔄️", "翻訳(日本語⇄英語)", (e) => {
         e.stopPropagation();
         this._doTranslate(tok, trans);
       });
