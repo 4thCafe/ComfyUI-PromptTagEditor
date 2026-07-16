@@ -1,0 +1,137 @@
+/* ComfyUI-PromptTagEditor / 4thCafe — チップUIスタイル */
+
+.pte-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-content: flex-start;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 4px;
+  overflow-y: auto;
+  background: var(--comfy-input-bg, #222);
+  border: 1px solid var(--border-color, #444);
+  border-radius: 6px;
+}
+
+.pte-empty {
+  color: var(--descrip-text, #888);
+  font-size: 11px;
+  font-style: italic;
+  padding: 2px 4px;
+}
+
+.pte-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 4px 2px 7px;
+  background: var(--comfy-menu-bg, #353535);
+  border: 1px solid var(--border-color, #4a4a4a);
+  border-radius: 5px;
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--input-text, #ddd);
+  cursor: grab;
+  user-select: none;
+  max-width: 100%;
+}
+
+.pte-chip.pte-dragging {
+  opacity: 0.45;
+}
+
+.pte-chip.pte-weighted {
+  border-color: #c0662e;
+  color: #ffb27a;
+}
+
+.pte-chip[data-type="lora"] {
+  border-color: #3b7dc0;
+  color: #8fc0ff;
+}
+
+.pte-chip[data-type="break"] {
+  border-color: #888;
+  color: #bbb;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.pte-chip[data-type="comment"] {
+  border-color: #666;
+  color: #999;
+  font-style: italic;
+}
+
+.pte-chip-label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 220px;
+  cursor: text;
+}
+
+.pte-chip-btns {
+  display: inline-flex;
+  align-items: center;
+  gap: 1px;
+}
+
+.pte-btn {
+  border: none;
+  background: transparent;
+  color: inherit;
+  opacity: 0.65;
+  cursor: pointer;
+  font-size: 12px;
+  line-height: 1;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  border-radius: 3px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pte-btn:hover {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.pte-del:hover {
+  background: rgba(220, 60, 60, 0.35);
+  color: #fff;
+}
+
+.pte-w-inc,
+.pte-w-dec {
+  font-weight: 700;
+}
+
+.pte-chip-edit {
+  font-size: 12px;
+  background: var(--comfy-input-bg, #1a1a1a);
+  color: var(--input-text, #fff);
+  border: 1px solid #5a8fd0;
+  border-radius: 3px;
+  padding: 1px 4px;
+  min-width: 60px;
+  outline: none;
+}
+
+/* チップエリアを載せるDOMウィジェットのラッパ */
+.pte-widget-wrap {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.pte-widget-header {
+  font-size: 10px;
+  color: var(--descrip-text, #888);
+  margin: 2px 2px 3px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
