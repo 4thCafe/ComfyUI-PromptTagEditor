@@ -150,8 +150,9 @@ export class TagEditor {
     if (hasJapanese(tok.text)) {
       // 日本語タグ → 英語に変換してテキスト欄へ反映(置換)
       const res = await translateTags([tok.text], "ja", "en");
-      const v = res && res[0] ? res[0] : null;
+      let v = res && res[0] ? res[0] : null;
       if (v) {
+        v = v.charAt(0).toLowerCase() + v.slice(1); // 頭文字は必ず小文字
         setTokenText(tok, v);      // タグ本体を英語へ置換
         tok.__trans = undefined;   // 訳表示はクリア
         this._emitAndRender();     // textareaへ同期 + 再描画
