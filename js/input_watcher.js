@@ -4,6 +4,9 @@
 
 import { TagEditor } from "./tag_editor.js";
 
+// このノード型のtextウィジェットにのみチップUIを適用(既存ノードには一切触れない)
+const TARGET_NODE_TYPE = "PromptTagEditor";
+
 export class Watcher {
   constructor(app, getEnabled) {
     this.app = app;
@@ -27,6 +30,8 @@ export class Watcher {
   attachToNode(node) {
     if (!this.getEnabled()) return;
     if (!node || !node.widgets) return;
+    // 専用ノードのみを対象(既存ノードは対象外)
+    if ((node.comfyClass || node.type) !== TARGET_NODE_TYPE) return;
     for (const w of node.widgets) {
       if (w.type !== "customtext") continue;   // multiline STRING のみ
       if (w.__pteAttached) continue;
