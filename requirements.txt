@@ -1,0 +1,3 @@
+# 翻訳: Google(要ネット・APIキー不要)を優先、失敗時は argostranslate(オフライン)へフォールバック
+deep-translator
+argostranslate

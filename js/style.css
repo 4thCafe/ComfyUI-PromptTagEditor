@@ -23,8 +23,8 @@
 
 .pte-chip {
   display: inline-flex;
-  align-items: center;
-  gap: 3px;
+  flex-direction: column;
+  align-items: stretch;
   padding: 2px 4px 2px 7px;
   background: var(--comfy-menu-bg, #353535);
   border: 1px solid var(--border-color, #4a4a4a);
@@ -35,6 +35,36 @@
   cursor: grab;
   user-select: none;
   max-width: 100%;
+}
+
+.pte-chip-row {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.pte-chip-row2 {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 2px;
+  padding-top: 2px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.15);
+}
+
+.pte-chip-trans {
+  font-size: 10px;
+  color: var(--descrip-text, #9aa);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 240px;
+}
+
+.pte-translate {
+  font-size: 10px;
+  font-weight: 700;
+  flex: 0 0 auto;
 }
 
 .pte-chip.pte-dragging {

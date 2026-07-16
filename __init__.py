@@ -6,6 +6,13 @@
 """
 
 
+# 翻訳ルート(/prompt_tag_editor/translate)を登録。失敗してもノード読込は継続。
+try:
+    from . import server as _server  # noqa: F401
+except Exception as _e:  # pragma: no cover
+    print(f"[PromptTagEditor] translate route not registered: {_e}")
+
+
 class PromptTagEditorNode:
     """タグ編集用の汎用プロンプトノード。text をそのまま STRING で出力する。
 
