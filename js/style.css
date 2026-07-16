@@ -16,7 +16,7 @@
 
 .pte-empty {
   color: var(--descrip-text, #888);
-  font-size: 11px;
+  font-size: 0.9em;
   font-style: italic;
   padding: 2px 4px;
 }
@@ -29,7 +29,7 @@
   background: var(--comfy-menu-bg, #353535);
   border: 1px solid var(--border-color, #4a4a4a);
   border-radius: 5px;
-  font-size: 12px;
+  font-size: inherit;
   line-height: 1.4;
   color: var(--input-text, #ddd);
   cursor: grab;
@@ -53,7 +53,7 @@
 }
 
 .pte-chip-trans {
-  font-size: 10px;
+  font-size: 0.9em;
   color: var(--descrip-text, #9aa);
   white-space: nowrap;
   overflow: hidden;
@@ -62,7 +62,7 @@
 }
 
 .pte-translate {
-  font-size: 10px;
+  font-size: 0.9em;
   font-weight: 700;
   flex: 0 0 auto;
 }
@@ -114,10 +114,10 @@
   color: inherit;
   opacity: 0.65;
   cursor: pointer;
-  font-size: 12px;
+  font-size: 1em;
   line-height: 1;
-  width: 16px;
-  height: 16px;
+  width: 1.5em;
+  height: 1.5em;
   padding: 0;
   border-radius: 3px;
   display: inline-flex;
@@ -141,7 +141,7 @@
 }
 
 .pte-chip-edit {
-  font-size: 12px;
+  font: inherit;
   background: var(--comfy-input-bg, #1a1a1a);
   color: var(--input-text, #fff);
   border: 1px solid #5a8fd0;

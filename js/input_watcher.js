@@ -61,6 +61,13 @@ export class Watcher {
     wrap.appendChild(header);
     wrap.appendChild(chipsEl);
 
+    // フォント・サイズを textarea に合わせる(子要素へ継承)
+    try {
+      const taCS = getComputedStyle(ta);
+      wrap.style.fontFamily = taCS.fontFamily;
+      wrap.style.fontSize = taCS.fontSize;
+    } catch (_) {}
+
     const editor = new TagEditor(chipsEl, (str) => this._syncToTextarea(w, ta, str));
     w.__pteEditor = editor;
 
@@ -74,11 +81,36 @@ export class Watcher {
       getValue: () => "",
       setValue: () => {},
       getHeight: () => {
-        const h = chipsEl.scrollHeight + 22;
-        return Math.max(56, Math.min(220, h));
+        // 実レイアウト後の内容高さ(header + chips)にぴったり合わせる
+        const h = wrap.scrollHeight;
+        return Math.max(24, Math.min(400, h));
       },
     });
     w.__pteDom = dom;
+
+    // 内容の高さが変わったらノードをフィット(余分な余白を出さない)
+    let _fitting = false;
+    const refit = () => {
+      if (_fitting) return;
+      // 幅が確定していない(未描画)ときは誤計測になるのでスキップ
+      if (chipsEl.clientWidth < 20) return;
+      _fitting = true;
+      requestAnimationFrame(() => {
+        try {
+          const cs = node.computeSize();
+          if (Math.abs(cs[1] - node.size[1]) > 1) {
+            node.setSize([node.size[0], cs[1]]);
+            node.setDirtyCanvas(true, true);
+          }
+        } catch (_) {}
+        _fitting = false;
+      });
+    };
+    try {
+      const ro = new ResizeObserver(() => refit());
+      ro.observe(chipsEl);
+    } catch (_) {}
+    w.__pteRefit = refit;
 
     // 初期描画
     editor.setFromString(w.value != null ? String(w.value) : ta.value || "");
@@ -94,14 +126,8 @@ export class Watcher {
     };
     ta.addEventListener("input", onInput);
 
-    // ノードサイズを再計算してチップエリアを見えるように
-    requestAnimationFrame(() => {
-      try {
-        const sz = node.computeSize();
-        node.setSize([Math.max(node.size[0], sz[0]), Math.max(node.size[1], sz[1])]);
-        node.setDirtyCanvas(true, true);
-      } catch (_) {}
-    });
+    // 初期レイアウト確定後にノードをフィット
+    refit();
   }
 
   // チップ編集結果を textarea(=真実の値)へ3行同期
