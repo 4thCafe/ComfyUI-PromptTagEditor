@@ -24,18 +24,22 @@ export class TagEditor {
     this.tokens = [];
     this.editing = false;       // inline編集中(逆同期抑制用)
     this._dragIndex = -1;
+    this._trailingSep = "";      // 末尾のカンマ(+空白)を保持
     this.container.classList.add("pte-chips");
   }
 
   // 外部の文字列からチップを再構築(逆同期時)
   setFromString(str) {
     if (this.editing) return; // 編集中は再構築しない
+    // 末尾のカンマ(全角/半角+空白)を記憶し、チップ操作後も維持する
+    const m = (str || "").match(/[,，][ \t]*$/);
+    this._trailingSep = m ? m[0] : "";
     this.tokens = tokenize(str);
     this.render();
   }
 
   _emit() {
-    this.onChange(serialize(this.tokens));
+    this.onChange(serialize(this.tokens) + this._trailingSep);
   }
 
   _emitAndRender() {

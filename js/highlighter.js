@@ -62,10 +62,13 @@ export class Highlighter {
     const parent = ta.parentElement;
     const cs = getComputedStyle(ta);
     this._origColor = cs.color;
+    const origBg = cs.backgroundColor;
 
     const bd = document.createElement("div");
     bd.className = "pte-hl-backdrop";
     const s = bd.style;
+    // 背景はバックドロップ側に持たせる(textareaを透明化すると黒背景が消えるため)
+    s.background = origBg && origBg !== "rgba(0, 0, 0, 0)" ? origBg : "var(--comfy-input-bg, #222)";
     s.position = "absolute";
     s.margin = "0";
     s.borderWidth = cs.borderWidth;
