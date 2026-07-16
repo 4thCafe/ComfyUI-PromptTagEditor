@@ -146,18 +146,28 @@ export class TagEditor {
   }
 
   async _doTranslate(tok, transEl) {
-    // 言語自動検出: 日本語を含む→英訳を表示。英語のみ→何もしない。
-    if (!hasJapanese(tok.text)) {
-      return;
-    }
     transEl.textContent = "…";
-    const res = await translateTags([tok.text], "ja", "en");
-    const v = res && res[0] ? res[0] : null;
-    if (v) {
-      tok.__trans = v;
-      transEl.textContent = v;
+    if (hasJapanese(tok.text)) {
+      // 日本語タグ → 英語に変換してテキスト欄へ反映(置換)
+      const res = await translateTags([tok.text], "ja", "en");
+      const v = res && res[0] ? res[0] : null;
+      if (v) {
+        setTokenText(tok, v);      // タグ本体を英語へ置換
+        tok.__trans = undefined;   // 訳表示はクリア
+        this._emitAndRender();     // textareaへ同期 + 再描画
+      } else {
+        transEl.textContent = "(翻訳失敗)";
+      }
     } else {
-      transEl.textContent = "(翻訳失敗)";
+      // 英語タグ(通常タグ)→ 日本語訳を下に表示(置換しない)
+      const res = await translateTags([tok.text], "en", "ja");
+      const v = res && res[0] ? res[0] : null;
+      if (v) {
+        tok.__trans = v;
+        transEl.textContent = v;
+      } else {
+        transEl.textContent = "(翻訳失敗)";
+      }
     }
   }
 
