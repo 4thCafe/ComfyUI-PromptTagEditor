@@ -33,8 +33,8 @@ git clone https://github.com/4thCafe/ComfyUI-PromptTagEditor
 ## ロードマップ
 
 - [x] タグ編集コア(チップ化・個別編集・重み・並べ替え・削除)
-- [ ] 各タグの翻訳表示(オフライン: argostranslate)
-- [ ] 入力欄の構文ハイライト
+- [x] タグ翻訳(日本語→英語は置換、英語→日本語は表示)
+- [x] 入力欄の構文ハイライト(重み/LoRA/BREAK/コメントを色分け)
 
 ## License
 

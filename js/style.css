@@ -151,6 +151,16 @@
   outline: none;
 }
 
+/* === textarea 構文ハイライト用バックドロップ === */
+.pte-hl-backdrop {
+  z-index: 0;
+  user-select: none;
+}
+.pte-hl-backdrop .pte-hl-lora { color: #8fc0ff; }
+.pte-hl-backdrop .pte-hl-weighted { color: #ffb27a; }
+.pte-hl-backdrop .pte-hl-break { color: #bbb; font-weight: 600; }
+.pte-hl-backdrop .pte-hl-comment { color: #999; font-style: italic; }
+
 /* チップエリアを載せるDOMウィジェットのラッパ */
 .pte-widget-wrap {
   width: 100%;

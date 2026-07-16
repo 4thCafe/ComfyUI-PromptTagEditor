@@ -3,6 +3,7 @@
 // ComfyUI-PromptTagEditor / 4thCafe
 
 import { TagEditor } from "./tag_editor.js";
+import { Highlighter } from "./highlighter.js";
 
 // このノード型のtextウィジェットにのみチップUIを適用(既存ノードには一切触れない)
 const TARGET_NODE_TYPE = "PromptTagEditor";
@@ -62,6 +63,9 @@ export class Watcher {
 
     const editor = new TagEditor(chipsEl, (str) => this._syncToTextarea(w, ta, str));
     w.__pteEditor = editor;
+
+    // textarea の構文ハイライト(バックドロップ方式)
+    w.__pteHighlighter = new Highlighter(ta);
 
     // DOMウィジェットとして隣接配置(serialize:false=値はネイティブtextareaが保持)
     const dom = node.addDOMWidget(`pte_${w.name}`, "pte_chips", wrap, {
