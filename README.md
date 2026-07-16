@@ -1,6 +1,6 @@
 # ComfyUI-PromptTagEditor
 
-プロンプトを**タグ(チップ)単位で編集**できる ComfyUI 専用ノード **`Prompt Tag Editor 🏷️`** を追加します。SD-WebUI の `sd-webui-prompt-all-in-one` のタグ編集体験を ComfyUI 上で再現します。
+プロンプトを**タグ(チップ)単位で編集**できる ComfyUI 専用ノード **`Prompt Tag Editor 🏷️`** を追加します。カンマ区切りのプロンプトを1タグずつチップ化し、個別編集・重み調整・並べ替え・削除を直感的に行えます。
 
 チップUIは**このノードの text 欄にのみ**表示され、`CLIP Text Encode` や `Note` など**既存のノードには一切影響しません**。
 
